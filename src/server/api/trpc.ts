@@ -6,13 +6,13 @@
  * TL;DR - This is where all the tRPC server stuff is created and plugged in. The pieces you will
  * need to use are documented accordingly near the end.
  */
-import type { Session } from '@supabase/supabase-js';
-import { initTRPC,TRPCError } from "@trpc/server";
+import type { Session } from "@supabase/supabase-js";
+import { initTRPC, TRPCError } from "@trpc/server";
 import superjson from "superjson";
 import { ZodError } from "zod";
 
 import { db } from "@/server/db";
-import { createClient } from '@/utils/supabase/server';
+import { createClient } from "@/utils/supabase/server";
 
 /**
  * 1. CONTEXT
@@ -26,12 +26,15 @@ import { createClient } from '@/utils/supabase/server';
  *
  * @see https://trpc.io/docs/server/context
  */
-export const createTRPCContext = async (opts: { headers: Headers; auth: Session | null; }) => {
-    const supabase = createClient();
-    const session = opts.auth ?? (await supabase.auth.getSession()).data.session;
-    const source = opts.headers.get('x-trpc-source') ?? 'unknown';
-  
-    console.log('>>>  from', source, 'by', session?.user.id);
+export const createTRPCContext = async (opts: {
+  headers: Headers;
+  auth: Session | null;
+}) => {
+  const supabase = createClient();
+  const session = opts.auth ?? (await supabase.auth.getSession()).data.session;
+  const source = opts.headers.get("x-trpc-source") ?? "unknown";
+
+  console.log(">>>  from", source, "by", session?.user.id);
   return {
     db,
     session,
@@ -60,9 +63,7 @@ const t = initTRPC.context<typeof createTRPCContext>().create({
   },
 });
 
-
 export const createCallerFactory = t.createCallerFactory;
-
 
 /**
  * 3. ROUTER & PROCEDURE (THE IMPORTANT BIT)
@@ -87,24 +88,22 @@ export const createTRPCRouter = t.router;
  */
 export const publicProcedure = t.procedure;
 
-
 const enforceUserIsAuthed = t.middleware(({ ctx, next }) => {
-    if (!ctx.session) {
-      throw new TRPCError({ code: 'UNAUTHORIZED' });
-    }
-    return next({
-      ctx,
-    });
+  if (!ctx.session) {
+    throw new TRPCError({ code: "UNAUTHORIZED" });
+  }
+  return next({
+    ctx,
   });
-  
-  /**
-   * Protected (authed) procedure
-   *
-   * If you want a query or mutation to ONLY be accessible to logged in users, use
-   * this. It verifies the session is valid and guarantees ctx.session.user is not
-   * null
-   *
-   * @see https://trpc.io/docs/procedures
-   */
-  export const protectedProcedure = t.procedure.use(enforceUserIsAuthed);
-  
+});
+
+/**
+ * Protected (authed) procedure
+ *
+ * If you want a query or mutation to ONLY be accessible to logged in users, use
+ * this. It verifies the session is valid and guarantees ctx.session.user is not
+ * null
+ *
+ * @see https://trpc.io/docs/procedures
+ */
+export const protectedProcedure = t.procedure.use(enforceUserIsAuthed);

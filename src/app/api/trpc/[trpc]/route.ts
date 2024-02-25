@@ -11,10 +11,10 @@ import { createClient } from "@/utils/supabase/server";
  * handling a HTTP request (e.g. when you make requests from Client Components).
  */
 const createContext = async (req: NextRequest) => {
-    const supabase = createClient();
+  const supabase = createClient();
   const session = (await supabase.auth.getSession()).data.session;
   return createTRPCContext({
-    auth:session,
+    auth: session,
     headers: req.headers,
   });
 };
@@ -29,7 +29,7 @@ const handler = (req: NextRequest) =>
       env.NODE_ENV === "development"
         ? ({ path, error }) => {
             console.error(
-              `❌ tRPC failed on ${path ?? "<no-path>"}: ${error.message}`
+              `❌ tRPC failed on ${path ?? "<no-path>"}: ${error.message}`,
             );
           }
         : undefined,

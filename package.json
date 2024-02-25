@@ -2,11 +2,17 @@
   "name": "supa-next-starter",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
+    "db:push": "prisma db push",
+    "db:studio": "prisma studio",
     "dev": "next dev",
+    "postinstall": "prisma generate",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "format": "prettier --check .",
+    "format:fix": "prettier --write --list-different ."
   },
   "dependencies": {
     "@prisma/client": "^5.10.2",
@@ -51,5 +57,8 @@
     "supabase": "^1.145.4",
     "tailwindcss": "^3.3.0",
     "typescript": "^5"
+  },
+  "ct3aMetadata": {
+    "initVersion": "7.27.0"
   }
 }

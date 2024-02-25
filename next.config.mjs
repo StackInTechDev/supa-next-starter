@@ -1,4 +1,4 @@
-import createJiti from 'jiti';
+import createJiti from "jiti";
 
 /** @type {import('next').NextConfig} */
 /**
@@ -6,7 +6,7 @@ import createJiti from 'jiti';
  * for Docker builds.
  */
 const jiti = createJiti(new URL(import.meta.url).pathname);
-jiti('./src/env');
+jiti("./src/env");
 const nextConfig = {};
 
 export default nextConfig;
