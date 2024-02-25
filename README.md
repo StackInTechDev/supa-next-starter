@@ -18,7 +18,7 @@ To get it running, follow the steps below:
     # Start supabase services
     pnpm supabase start
 
-    # Push the Drizzle schema to the database
+    # Push the prisma schema to the database
     pnpm db:push
 
 ### 2. Start the development server
