@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+
 import "./globals.css";
+
 import { Toaster } from "@/components/ui/sonner";
+import { TRPCReactProvider } from "@/utils/trpc/client";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,7 +23,8 @@ export default function RootLayout({
       <body
         className={`flex h-screen w-screen items-center justify-center ${inter.className}`}
       >
-        {children}
+        <TRPCReactProvider>{children}</TRPCReactProvider>
+
         <Toaster />
       </body>
     </html>

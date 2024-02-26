@@ -1,8 +1,8 @@
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-
-import { createServerClient, type CookieOptions } from "@supabase/ssr";
+import type { CookieOptions } from "@supabase/ssr";
 import { cookies } from "next/headers";
+import { createServerClient } from "@supabase/ssr";
 
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 
 export const createClient = () => {
   const cookieStore = cookies();

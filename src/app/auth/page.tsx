@@ -1,5 +1,6 @@
-import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
+
 import { signIn } from "./actions/signIn";
 import { signUp } from "./actions/signUp";
 

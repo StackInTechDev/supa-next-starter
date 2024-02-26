@@ -7,12 +7,11 @@
  * need to use are documented accordingly near the end.
  */
 import type { Session } from "@supabase/supabase-js";
+import { db } from "@/server/db";
+import { createClient } from "@/utils/supabase/server";
 import { initTRPC, TRPCError } from "@trpc/server";
 import superjson from "superjson";
 import { ZodError } from "zod";
-
-import { db } from "@/server/db";
-import { createClient } from "@/utils/supabase/server";
 
 /**
  * 1. CONTEXT

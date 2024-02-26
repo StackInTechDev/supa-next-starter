@@ -1,5 +1,5 @@
-import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
+import { createClient } from "@/utils/supabase/server";
 
 export const signIn = async (formData: FormData) => {
   "use server";
@@ -14,7 +14,7 @@ export const signIn = async (formData: FormData) => {
   });
 
   if (error) {
-    console.log(error)
+    console.log(error);
     return redirect("/auth?error=Could not authenticate user");
   }
 

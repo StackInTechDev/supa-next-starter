@@ -7,6 +7,8 @@ import createJiti from "jiti";
  */
 const jiti = createJiti(new URL(import.meta.url).pathname);
 jiti("./src/env");
-const nextConfig = {};
+const nextConfig = {
+  output: "standalone",
+};
 
 export default nextConfig;
