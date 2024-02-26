@@ -18,9 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={
-          inter.className + "flex h-screen w-screen items-center justify-center"
-        }
+        className={`flex h-screen w-screen items-center justify-center ${inter.className}`}
       >
         {children}
         <Toaster />
